@@ -1,0 +1,33 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>login</title>
+    <link href="favicon.ico" rel="shortcut icon" />
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style=" background: url(http://global.bing.com/az/hprichbg/rb/RavenWolf_EN-US4433795745_1920x1080.jpg) no-repeat center center fixed; background-size: 100%;">
+ 
+
+ <div class="container">
+
+      <form class="form-signin" method="post" novalidate>
+          {% csrf_token %}
+        <h2 class="form-signin-heading">请登录</h2>
+        <input type="text" id="inputEmail" class="form-control" placeholder="username" name="username" required autofocus>
+        <input type="text" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+          <div><span STYLE="color: red">{{ error_msg }}</span></div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+      </form>
+
+    </div>
+</body>
+
+</html>

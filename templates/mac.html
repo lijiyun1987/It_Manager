@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load paginator_bootstrap %}
+{% block content %}
+  <div style="float:right">
+      <form method="get" action="" class="form-inline my-2 my-lg-0">
+          {{ form.keyword }}
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜一下</button>
+      </form>
+  </div>
+  <div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>机器编号</th>
+        <th>厂家</th>
+        <th>位置</th>
+        <th>机器类型</th>
+        <th>机器型号</th>
+        <th>机器序列号</th>
+        <th>机器IPMI</th>
+        <th>使用描述</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for mac in macs %}
+        <tr>
+{#        <tr onclick="location.href='{% url 'detail' mac.id %}';">#}
+            <td>{{ mac.mac_id }}</td>
+            <td>{{ mac.vender }}</td>
+            <td>{{ mac.location }}</td>
+            <td>{{ mac.mac_type }}</td>
+            <td>{{ mac.model_id }}</td>
+            <td>{{ mac.mac_sn }}</td>
+            <td>{{ mac.ipmi }}</td>
+            <td>{{ mac.use_des }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+    <div class="col-sm">
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% autoescape off %}
+                    {% custom_paginator page %}
+                {% endautoescape %}
+           </ul>
+        </nav>
+        <form action="">
+
+        </form>
+    </div>
+  </div>
+
+{% endblock %}

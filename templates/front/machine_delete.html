@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>巡检</h2>
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ machine }}"?</p>
+    <input type="submit" value="确认" />
+</form>
+{% endblock %}
+

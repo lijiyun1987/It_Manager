@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load paginator_bootstrap %}
+{% block content %}
+  <div style="float:right">
+      <form method="get" action="" class="form-inline my-2 my-lg-0">
+          {% csrf_token %}
+          {{ form.keyword }}
+{#          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜一下</button>
+      </form>
+  </div>
+  <div>
+  <table id="myTable" class="table table-hover">
+    <thead>
+      <tr>
+        <th>机器编号</th>
+        <th>厂家</th>
+        <th>位置</th>
+        <th>机器类型</th>
+        <th>机器型号</th>
+        <th>机器序列号</th>
+        <th>机器IPMI</th>
+        <th>使用描述</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  </div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+    $("#id_keyword").bind('input propertychange', function() {
+      var keyword = $(this).val();
+      $.ajax({
+        url: '/ajax/search/',
+        data: {
+          'keyword': keyword,
+               'model': 'Machine',
+               'field1': 'mac_id',
+               'field2': 'ipmi',
+                 },
+        type: 'get',
+        dataType: 'json',
+            success: function(data){
+        var obj = eval(data);
+            console.log(obj);
+		    var tbody = $('<tbody></tbody>');
+		    $(obj).each(function (index){
+                var val = obj[index];
+                var tr = $('<tr></tr>');
+                tr.append('<td>' + val.fields.mac_id + '</td>' + '<td>' + val.fields.vender + '</td>' + '<td>' + val.fields.location + '</td>'+ '<td>' + val.fields.mac_type + '</td>'+ '<td>' + val.fields.model_id + '</td>'+ '<td>' + val.fields.mac_sn + '</td>'+ '<td>' + val.fields.ipmi + '</td>'+ '<td>' + val.fields.use_des + '</td>');
+                tbody.append(tr);
+            });
+		$('#myTable tbody').replaceWith(tbody);
+        },
+
+      });
+
+    });
+
+</script>
+
+
+{% endblock %}

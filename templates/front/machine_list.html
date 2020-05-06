@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>巡检</h2>
+
+    {% for machine in object_list %}
+        {{ machine.MacId }}
+    {% endfor %}
+{% endblock %}
+
